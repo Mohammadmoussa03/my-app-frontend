@@ -60,11 +60,11 @@ export default function WalletPage() {
   }, [])
 
   const fetchWalletData = async () => {
-    const { data: walletData } = await api.get<any>("/wallet/wallet/my/")
-    const { data: transactionsData } = await api.get<any>("/wallet/wallet/transactions/")
+    const { data: walletData } = await api.get<any>("/api/wallet/wallet/my/")
+    const { data: transactionsData } = await api.get<any>("/api/wallet/transactions/")
 
     if (isClient) {
-      const { data: contractsData } = await api.get<any>("/contract/client/")
+      const { data: contractsData } = await api.get<any>("/api/contract/client/")
       if (contractsData) {
         const contractsArray = Array.isArray(contractsData) ? contractsData : (contractsData.results || [])
         const pending = contractsArray.filter((c: Contract) => c.status === "PENDING FUNDS")
@@ -96,7 +96,7 @@ export default function WalletPage() {
       return
     }
 
-    const { error: apiError } = await api.post(`/wallet/fund/${contractId}/escrow`, {})
+    const { error: apiError } = await api.post(`/api/wallet/fund/${contractId}/escrow`, {})
 
     if (apiError) {
       // Handle specific error messages from backend
@@ -122,7 +122,7 @@ export default function WalletPage() {
     setError("")
     setDepositLoading(true)
 
-    const { data, error: apiError } = await api.post<{ checkout_url: string }>("/wallet/wallet/deposit/", {
+    const { data, error: apiError } = await api.post<{ checkout_url: string }>("/api/wallet/wallet/deposit/", {
       amount: amount,
     })
 
@@ -151,7 +151,7 @@ export default function WalletPage() {
     setError("")
     setWithdrawLoading(true)
 
-    const { data, error: apiError } = await api.post<{ withdrawal_id: number; status: string }>("/wallet/wallet/withdraw/", {
+    const { data, error: apiError } = await api.post<{ withdrawal_id: number; status: string }>("/api/wallet/wallet/withdraw/", {
       amount: amount,
     })
 

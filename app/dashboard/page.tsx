@@ -50,29 +50,29 @@ export default function DashboardPage() {
     const fetchStats = async () => {
       try {
         if (user?.role?.toUpperCase() === "CLIENT") {
-          const { data: jobs } = await api.get<any>("/jobs/jobs/")
+          const { data: jobs } = await api.get<any>("/api/jobs/jobs/")
           const jobsArray = Array.isArray(jobs) ? jobs : (jobs?.results || [])
           setStats((prev) => ({ ...prev, jobs: jobsArray.length }))
         }
 
         const { data: proposals } = await api.get<any>(
           user?.role?.toUpperCase() === "FREELANCER"
-            ? "/proposal/my-proposal/"
-            : "/proposal/job-proposals/"
+            ? "/api/proposal/my-proposal/"
+            : "/api/proposal/job-proposals/"
         )
         const proposalsArray = Array.isArray(proposals) ? proposals : (proposals?.results || [])
         setStats((prev) => ({ ...prev, proposals: proposalsArray.length }))
 
         const { data: contracts } = await api.get<any>(
           user?.role?.toUpperCase() === "CLIENT"
-            ? "/contract/client/"
-            : "/contract/freelancer/"
+            ? "/api/contract/client/"
+            : "/api/contract/freelancer/"
         )
         const contractsArray = Array.isArray(contracts) ? contracts : (contracts?.results || [])
         setStats((prev) => ({ ...prev, contracts: contractsArray.length }))
 
         // Fetch wallet data
-        const { data: walletData } = await api.get<any>("/wallet/wallet/my/")
+        const { data: walletData } = await api.get<any>("/api/wallet/wallet/my/")
         if (walletData) {
           const walletArray = Array.isArray(walletData) ? walletData : (walletData.results || [walletData])
           if (walletArray.length > 0) {

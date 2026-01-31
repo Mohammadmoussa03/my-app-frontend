@@ -41,7 +41,7 @@ export default function CreateJobPage() {
   const [creatingCategory, setCreatingCategory] = useState(false)
 
   const fetchCategories = async () => {
-    const { data } = await api.get<any>("/jobs/categories/")
+    const { data } = await api.get<any>("/api/jobs/categories/")
     if (data) {
       const categoriesArray = Array.isArray(data) ? data : (data.results || [])
       setCategories(categoriesArray)
@@ -71,7 +71,7 @@ export default function CreateJobPage() {
     setCreatingCategory(true)
     setError("")
 
-    const { data, error: apiError } = await api.post<any>("/jobs/categories/create/", {
+    const { data, error: apiError } = await api.post<any>("/api/jobs/categories/create/", {
       name: newCategoryName.trim(),
       slug: generateSlug(newCategoryName.trim()),
     })
@@ -92,7 +92,7 @@ export default function CreateJobPage() {
     setError("")
     setLoading(true)
 
-    const { error: apiError } = await api.post("/jobs/jobs/create/", {
+    const { error: apiError } = await api.post("/api/jobs/jobs/create/", {
       title,
       description,
       category: Number(categoryId),

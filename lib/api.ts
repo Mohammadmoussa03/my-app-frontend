@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000'
+const API_URL =  'http://0.0.0.0:8000'
 
 interface TokenResponse {
   access: string
@@ -137,7 +137,7 @@ class ApiClient {
     if (!refreshToken) return null
 
     try {
-      const response = await fetch(`${this.baseURL}/account/auth/token/refresh/`, {
+      const response = await fetch(`${this.baseURL}/api/token/refresh/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

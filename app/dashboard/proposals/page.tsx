@@ -37,7 +37,7 @@ export default function ProposalsPage() {
   }, [isClient])
 
   const fetchProposals = async () => {
-    const endpoint = isClient ? "/proposal/job-proposals/" : "/proposal/my-proposal/"
+    const endpoint = isClient ? "/api/proposal/job-proposals/" : "/api/proposal/my-proposal/"
 
     const { data } = await api.get<any>(endpoint)
 
@@ -53,7 +53,7 @@ export default function ProposalsPage() {
     setError("")
     setActionLoading(proposalId)
 
-    const { error: apiError } = await api.patch(`/proposal/proposals/${proposalId}/accept/`, {})
+    const { error: apiError } = await api.patch(`/api/proposal/proposals/${proposalId}/accept/`, {})
 
     if (apiError) {
       setError(apiError)
@@ -68,7 +68,7 @@ export default function ProposalsPage() {
     setError("")
     setActionLoading(proposalId)
 
-    const { error: apiError } = await api.patch(`/proposal/proposals/${proposalId}/reject/`, {})
+    const { error: apiError } = await api.patch(`/api/proposal/proposals/${proposalId}/reject/`, {})
 
     if (apiError) {
       setError(apiError)

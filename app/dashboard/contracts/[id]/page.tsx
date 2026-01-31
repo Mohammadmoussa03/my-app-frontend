@@ -48,7 +48,7 @@ export default function ContractDetailsPage() {
 
   const fetchContractDetails = async () => {
     const { data: contractData } = await api.get<Contract>(
-      `/contract/${params.id}/`
+      `/api/contract/${params.id}/`
     )
     const { data: deliverablesData } = await api.get<any>(
       `/contracts/${params.id}/deliverables/list/`

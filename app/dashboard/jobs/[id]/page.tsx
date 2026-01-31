@@ -34,7 +34,7 @@ export default function JobDetailsPage() {
 
   useEffect(() => {
     const fetchJob = async () => {
-      const { data, error } = await api.get<any>(`/jobs/jobs/${params.id}/`)
+      const { data, error } = await api.get<any>(`/api/jobs/jobs/${params.id}/`)
 
       if (error) {
         setError(error)
@@ -58,7 +58,7 @@ export default function JobDetailsPage() {
     setError('')
     setSubmitting(true)
 
-    const { error } = await api.post('/proposal/create/', {
+    const { error } = await api.post('/api/proposal/create/', {
       job: job?.id,
       cover_letter: coverLetter,
       proposed_price: proposedPrice,

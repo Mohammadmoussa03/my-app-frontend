@@ -30,8 +30,8 @@ export default function JobsPage() {
   useEffect(() => {
     const fetchData = async () => {
       const [jobsRes, categoriesRes] = await Promise.all([
-        api.get<any>("/jobs/jobs/"),
-        api.get<any>("/jobs/categories/"),
+        api.get<any>("/api/jobs/jobs/"),
+        api.get<any>("/api/jobs/categories/"),
       ])
 
       // Handle paginated response (results array) or direct array
@@ -206,3 +206,4 @@ export default function JobsPage() {
     </div>
   )
 }
+ 

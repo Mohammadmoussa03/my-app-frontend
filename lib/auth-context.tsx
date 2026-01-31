@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const login = async (credentials: LoginCredentials) => {
-    const { data, error } = await api.post<TokenResponse>('/account/login/', {
+    const { data, error } = await api.post<TokenResponse>('/api/account/login/', {
       email: credentials.email,
       password: credentials.password
     })
@@ -51,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('refresh_token', data.refresh)
 
       // Fetch user profile (now includes nested user object with role)
-      const { data: profileData } = await api.get<any>('/account/profile/me/')
+      const { data: profileData } = await api.get<any>('/api/account/profile/me/')
       
       if (profileData) {
         // Extract user data from nested user object in profile response
@@ -80,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const signup = async (signupData: SignupData) => {
-    const { error } = await api.post('/account/signup/', signupData)
+    const { error } = await api.post('/api/account/signup/', signupData)
 
     if (error) {
       return { error }
@@ -91,7 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const logout = async () => {
-    await api.post('/account/logout/', {})
+    await api.post('/api/account/logout/', {})
     localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')
     localStorage.removeItem('user')

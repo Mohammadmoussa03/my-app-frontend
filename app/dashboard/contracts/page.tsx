@@ -20,29 +20,17 @@ export default function ContractsPage() {
   const isClient = user?.role?.toUpperCase() === "CLIENT"
 
   useEffect(() => {
-    console.log("[v0] ContractsPage - user:", user)
-    console.log("[v0] ContractsPage - user.role:", user?.role)
-    
-    if (!user) {
-      console.log("[v0] ContractsPage - No user yet, waiting...")
-      return
-    }
+    if (!user) return
 
     const fetchContracts = async () => {
-      const roleUpper = user.role?.toUpperCase()
-      console.log("[v0] ContractsPage - roleUpper:", roleUpper)
-      
-      const endpoint = roleUpper === "CLIENT"
-        ? "/contract/client/"
-        : "/contract/freelancer/"
-      
-      console.log("[v0] ContractsPage - Fetching from endpoint:", endpoint)
+      const endpoint = user.role?.toUpperCase() === "CLIENT"
+        ? "/api/contract/client/"
+        : "/api/contract/freelancer/"
 
       const { data } = await api.get<any>(endpoint)
 
       if (data) {
         const contractsArray = Array.isArray(data) ? data : (data.results || [])
-        console.log("[v0] ContractsPage - Contracts fetched:", contractsArray.length)
         setContracts(contractsArray)
       }
       setLoading(false)

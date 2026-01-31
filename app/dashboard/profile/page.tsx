@@ -33,7 +33,7 @@ export default function ProfilePage() {
   }, [])
 
   const fetchProfile = async () => {
-    const { data } = await api.get<Profile>("/account/profile/me/")
+    const { data } = await api.get<Profile>("/api/account/profile/me/")
 
     if (data) {
       setProfile(data)
@@ -63,7 +63,7 @@ export default function ProfilePage() {
       formData.append("avatar", avatarFile)
     }
 
-    const { error: apiError } = await api.uploadFile("/account/profile/me/", formData)
+    const { error: apiError } = await api.uploadFile("/api/account/profile/me/", formData)
 
     if (apiError) {
       setError(apiError)
