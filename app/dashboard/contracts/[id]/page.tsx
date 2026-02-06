@@ -51,7 +51,7 @@ export default function ContractDetailsPage() {
       `/api/contract/${params.id}/`
     )
     const { data: deliverablesData } = await api.get<any>(
-      `/contracts/${params.id}/deliverables/list/`
+      `/api/deliverables/contracts/${params.id}/deliverables/list/`
     )
 
     if (contractData) setContract(contractData)
@@ -75,7 +75,7 @@ export default function ContractDetailsPage() {
     }
 
     const { error: apiError } = await api.uploadFile(
-      `/contracts/${params.id}/deliverables/`,
+      `/api/deliverables/contracts/${params.id}/deliverables/`,
       formData,
       'POST'
     )
@@ -93,7 +93,7 @@ export default function ContractDetailsPage() {
 
   const handleApprove = async (deliverableId: number) => {
     setError('')
-    const { error: apiError } = await api.patch(`/deliverables/${deliverableId}/approve/`, {})
+    const { error: apiError } = await api.patch(`/api/deliverables/deliverables/${deliverableId}/approve/`, {})
 
     if (apiError) {
       setError(apiError)
@@ -105,7 +105,7 @@ export default function ContractDetailsPage() {
 
   const handleReject = async (deliverableId: number) => {
     setError('')
-    const { error: apiError } = await api.patch(`/deliverables/${deliverableId}/reject/`, {})
+    const { error: apiError } = await api.patch(`/api/deliverables/deliverables/${deliverableId}/reject/`, {})
 
     if (apiError) {
       setError(apiError)
