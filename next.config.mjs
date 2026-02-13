@@ -6,9 +6,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  output: 'standalone',   // 🔥 IMPORTANT for Docker
 }
 
-export default {
-  
-}
-
+export default nextConfig
